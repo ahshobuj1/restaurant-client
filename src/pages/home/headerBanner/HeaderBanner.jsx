@@ -10,7 +10,7 @@ import img6 from '../../../assets/home/06.png';
 
 const HeaderBanner = () => {
   return (
-    <Carousel>
+    <Carousel className="text-center">
       <div>
         <img src={img1} alt="banner images" className="max-h-[650px]" />
       </div>
