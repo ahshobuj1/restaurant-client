@@ -7,7 +7,7 @@ const RatingCard = ({review}) => {
   const {name, details, rating} = review;
 
   return (
-    <div className="text-center">
+    <div className="text-center mx-5">
       <Rating
         style={{maxWidth: 180}}
         className="mx-auto"

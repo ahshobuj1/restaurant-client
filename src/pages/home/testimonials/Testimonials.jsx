@@ -5,7 +5,7 @@ import SectionTitle from '../../shared/sectionTitle/SectionTitle';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import {Navigation} from 'swiper/modules';
+import {Autoplay, Navigation} from 'swiper/modules';
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
@@ -25,7 +25,11 @@ const Testimonials = () => {
 
       <Swiper
         navigation={true}
-        modules={[Navigation]}
+        autoplay={{
+          delay: 1500,
+          disableOnInteraction: false,
+        }}
+        modules={[Navigation, Autoplay]}
         className="mySwiper"
         speed={1000}>
         {reviews.map((review) => (

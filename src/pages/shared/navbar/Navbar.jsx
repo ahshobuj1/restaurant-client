@@ -1,7 +1,29 @@
+import {NavLink} from 'react-router';
+
 const Navbar = () => {
+  const navItems = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+
+      <li>
+        <NavLink to="/menu">Menu</NavLink>
+      </li>
+
+      <li>
+        <NavLink to="/home">Home</NavLink>
+      </li>
+
+      <li>
+        <NavLink to="/home">Home</NavLink>
+      </li>
+    </>
+  );
+
   return (
     <>
-      <div className="navbar bg-[#151515] opacity-50 z-50 shadow-sm fixed w-7xl text-white">
+      <div className="navbar bg-[#151515] opacity-70 z-50 shadow-sm fixed w-7xl text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -23,23 +45,7 @@ const Navbar = () => {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+              {navItems}
             </ul>
           </div>
           <a className=" px-5 text-xl hidden md:block">
@@ -48,27 +54,7 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
 
         <div className="navbar-end md:hidden">
