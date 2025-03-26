@@ -52,7 +52,7 @@ const RecommendsItem = () => {
         className="mySwiper">
         {items.map((item) => (
           <SwiperSlide>
-            <ProductCard key={item.id} item={item} />{' '}
+            <ProductCard key={item.id} item={item} />
           </SwiperSlide>
         ))}
       </Swiper>

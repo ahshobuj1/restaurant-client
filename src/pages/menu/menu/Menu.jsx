@@ -5,6 +5,7 @@ import pizzaImg from '../../../assets/menu/pizza-bg.jpg';
 import saladImg from '../../../assets/menu/salad-bg.jpg';
 import soupImg from '../../../assets/menu/soup-bg.jpg';
 import MenuHeader from '../menuHeader/MenuHeader';
+import {Helmet} from 'react-helmet-async';
 
 const Menu = () => {
   const [menu] = useMenu();
@@ -17,6 +18,10 @@ const Menu = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>Bistro | Menu</title>
+      </Helmet>
+
       <MenuHeader item={offeredItem} />
 
       <MenuSection
