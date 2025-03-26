@@ -27,7 +27,7 @@ const Menu = () => {
       <MenuSection
         item={dessertItem}
         img={dessertImg}
-        heading={'Dessert'}
+        heading={'dessert'}
         desc={
           'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa beatae dolores unde sit voluptates consequatur.'
         }
@@ -37,7 +37,7 @@ const Menu = () => {
       <MenuSection
         item={pizzaItem}
         img={pizzaImg}
-        heading={'Pizza'}
+        heading={'pizza'}
         desc={
           'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa beatae dolores unde sit voluptates consequatur.'
         }
@@ -48,7 +48,7 @@ const Menu = () => {
         item={saladItem}
         img={saladImg}
         buttonText={'order your favorite food'}
-        heading={'Salads'}
+        heading={'salads'}
         desc={
           'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa beatae dolores unde sit voluptates consequatur.'
         }
@@ -58,7 +58,7 @@ const Menu = () => {
         item={soupItem}
         img={soupImg}
         buttonText={'order your favorite food'}
-        heading={'Soups'}
+        heading={'soups'}
         desc={
           'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa beatae dolores unde sit voluptates consequatur.'
         }

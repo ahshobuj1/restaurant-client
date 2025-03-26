@@ -1,3 +1,4 @@
+import {Link} from 'react-router';
 import menuImg from '../../../assets/menu/banner3.jpg';
 import ItemCard from '../../shared/itemCard/ItemCard';
 import PageCover from '../../shared/pageCover/PageCover';
@@ -24,7 +25,9 @@ const MenuHeader = ({item}) => {
       </div>
 
       <div className="text-center my-10">
-        <PrimaryButton desc="order your favorite food" />
+        <Link to={`/shop/drinks`}>
+          <PrimaryButton desc="order your favorite food" />
+        </Link>
       </div>
     </>
   );

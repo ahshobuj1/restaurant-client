@@ -1,17 +1,20 @@
 import {Helmet} from 'react-helmet-async';
 import PageCover from '../../shared/pageCover/PageCover';
 import shopImg from '../../../assets/shop/banner2.jpg';
-import ProductCard from '../../shared/productCard/ProductCard';
 
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import {useState} from 'react';
 import useMenu from '../../../hooks/useMenu';
 import TabCard from '../tabCard/TabCard';
+import {useParams} from 'react-router';
 
 const Shop = () => {
-  const [tabIndex, setTabIndex] = useState(0);
-  console.log(tabIndex);
+  const {category} = useParams();
+  const categories = ['salads', 'pizza', 'soups', 'dessert', 'drinks'];
+  const initialIndex = categories.indexOf(category);
+
+  const [tabIndex, setTabIndex] = useState(initialIndex);
 
   const [menu] = useMenu();
 

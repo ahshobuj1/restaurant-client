@@ -3,6 +3,7 @@ import ItemCard from '../itemCard/ItemCard';
 import PrimaryButton from '../primaryButton/PrimaryButton';
 import SectionTitle from '../sectionTitle/SectionTitle';
 import PageCover from '../pageCover/PageCover';
+import {Link} from 'react-router';
 
 const MenuSection = ({img, item, buttonText, heading, desc}) => {
   return (
@@ -18,7 +19,9 @@ const MenuSection = ({img, item, buttonText, heading, desc}) => {
       </div>
 
       <div className="text-center my-10">
-        <PrimaryButton desc={buttonText} />
+        <Link to={`/shop/${heading}`}>
+          <PrimaryButton desc={buttonText} />
+        </Link>
       </div>
     </div>
   );

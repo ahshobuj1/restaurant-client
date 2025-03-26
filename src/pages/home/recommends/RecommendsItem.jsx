@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react';
 import ProductCard from '../../shared/productCard/ProductCard';
 import SectionTitle from '../../shared/sectionTitle/SectionTitle';
 
@@ -6,18 +5,11 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import {Autoplay, Pagination} from 'swiper/modules';
+import useMenu from '../../../hooks/useMenu';
 
 const RecommendsItem = () => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    fetch('public/menu.json')
-      .then((data) => data.json())
-      .then((items) => {
-        const saladItems = items.filter((item) => item.category === 'salad');
-        setItems(saladItems);
-      });
-  }, []);
+  const [menu] = useMenu();
+  const saladItems = menu.filter((item) => item.category === 'salad');
 
   return (
     <section className="px-2 md:px-0 md:mb-20">
@@ -50,7 +42,7 @@ const RecommendsItem = () => {
         }}
         modules={[Pagination, Autoplay]}
         className="mySwiper">
-        {items.map((item) => (
+        {saladItems.map((item) => (
           <SwiperSlide>
             <ProductCard key={item.id} item={item} />
           </SwiperSlide>
