@@ -2,8 +2,16 @@ import {Link} from 'react-router';
 import image from '../../assets/others/authentication.png';
 import loginImg from '../../assets/others/authentication2.png';
 import {useForm} from 'react-hook-form';
+import {useEffect, useState} from 'react';
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from 'react-simple-captcha';
 
 const Login = () => {
+  const [disabled, setDisabled] = useState(true);
+
   const {
     register,
     handleSubmit,
@@ -12,11 +20,25 @@ const Login = () => {
 
   const onSubmit = (data) => console.log(data);
 
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const handleCaptchaMatch = (e) => {
+    const user_captcha_value = e.target.value;
+
+    if (validateCaptcha(user_captcha_value) == true) {
+      setDisabled(false);
+    } else {
+      setDisabled(tru);
+    }
+  };
+
   return (
     <section
       style={{backgroundImage: `url(${image})`}}
       className="min-h-screen flex justify-center items-center p-5 md:p-30">
-      <div className="grid md:grid-cols-2 shadow-slate-300 shadow-2xl">
+      <div className="grid md:grid-cols-2 shadow-slate-300 shadow-2xl py-6">
         <img src={loginImg} alt="loginImg" />
         <div>
           <div className="card w-full max-w-sm shrink-0 shadow-2xl">
@@ -49,7 +71,18 @@ const Login = () => {
                 <div>
                   <a className="link link-hover">Forgot password?</a>
                 </div>
+
+                <div>
+                  <LoadCanvasTemplate />
+                  <input
+                    onBlur={handleCaptchaMatch}
+                    type="text"
+                    className="input"
+                    placeholder="Type Captcha Here..."
+                  />
+                </div>
                 <button
+                  disabled={disabled}
                   type="submit"
                   className="btn btn-neutral mt-4 bg-[#d19f54c0] border-0">
                   Login
