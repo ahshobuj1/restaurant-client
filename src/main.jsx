@@ -4,13 +4,14 @@ import './index.css';
 import {RouterProvider} from 'react-router';
 import router from './router/Routes.jsx';
 import {HelmetProvider} from 'react-helmet-async';
+import UserContext from './contextApi/userContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HelmetProvider>
-      <div className="max-w-7xl mx-auto">
+      <UserContext>
         <RouterProvider router={router} />
-      </div>
+      </UserContext>
     </HelmetProvider>
   </StrictMode>
 );
