@@ -30,7 +30,7 @@ const Login = () => {
     if (validateCaptcha(user_captcha_value) == true) {
       setDisabled(false);
     } else {
-      setDisabled(tru);
+      setDisabled(true);
     }
   };
 
@@ -91,7 +91,9 @@ const Login = () => {
             </form>
 
             <div className="text-center -mt-4">
-              <Link className="text-[#d19f54c0] font-semibold" to="/signup">
+              <Link
+                className="text-[#d19f54c0] font-semibold hover:text-blue-500 hover:border-b-2 duration-200"
+                to="/signup">
                 New here ? Create a New Account
               </Link>
               <p>Or Signin With</p>
