@@ -1,9 +1,18 @@
-import {Link} from 'react-router';
+import {Link, useNavigate} from 'react-router';
 import image from '../../assets/others/authentication.png';
 import loginImg from '../../assets/others/authentication2.png';
 import {useForm} from 'react-hook-form';
+import useAuth from '../../hooks/useAuth';
+import {updateProfile} from 'firebase/auth';
+import {auth} from '../../firebase/firebase';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
+  const {createUser} = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -12,6 +21,42 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+
+    const {name, photoURL, email, password} = data;
+
+    createUser(email, password)
+      .then((res) => {
+        console.log(res.user);
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photoURL,
+        })
+          .then(() => {
+            const userInfo = {name, photoURL, email};
+
+            axiosPublic
+              .post('/user', userInfo)
+              .then((res) => {
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'User Account Created Successfully',
+                    showConfirmButton: false,
+                    timer: 2500,
+                  });
+                  navigate('/');
+                }
+              })
+              .catch((err) => console.log(err));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
