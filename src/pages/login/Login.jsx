@@ -1,4 +1,4 @@
-import {Link} from 'react-router';
+import {Link, useLocation, useNavigate} from 'react-router';
 import image from '../../assets/others/authentication.png';
 import loginImg from '../../assets/others/authentication2.png';
 import {useForm} from 'react-hook-form';
@@ -8,9 +8,14 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from 'react-simple-captcha';
+import useAuth from '../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
+  const {loginUser} = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -18,7 +23,18 @@ const Login = () => {
     formState: {errors},
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    loginUser(data.email, data.password)
+      .then(() => {
+        Swal.fire({
+          title: 'Success',
+          text: 'Your account has been logged in successfully!',
+          icon: 'success',
+        });
+        navigate(location?.state ? location?.state : '/');
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     loadCaptchaEnginge(6);

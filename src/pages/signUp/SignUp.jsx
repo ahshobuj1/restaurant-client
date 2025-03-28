@@ -56,6 +56,13 @@ const SignUp = () => {
       })
       .catch((err) => {
         console.log(err);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `${err.message}`,
+          showConfirmButton: false,
+          timer: 2500,
+        });
       });
   };
 
