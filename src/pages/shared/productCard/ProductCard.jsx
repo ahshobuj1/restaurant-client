@@ -2,39 +2,58 @@ import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import useCart from '../../../hooks/useCart';
+import {useLocation, useNavigate} from 'react-router';
 
 const ProductCard = ({item}) => {
   const {image, name, recipe, _id, price} = item;
   const {user} = useAuth();
   const axiosPublic = useAxiosPublic();
   const [, refetch] = useCart();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
-    const cartInfo = {
-      _id,
-      email: user?.email,
-      image,
-      name,
-      recipe,
-      price,
-    };
-
-    axiosPublic
-      .post('/cart', cartInfo)
-      .then((res) => {
-        if (res.data.insertedId) {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Added to the cart Successfully',
-            showConfirmButton: true,
-            timer: 2500,
-          });
-
-          refetch();
+    if (!user) {
+      Swal.fire({
+        title: 'You are not logged in?',
+        text: 'Please, Login to add to the cart!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Login!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/login', {state: location?.pathname});
         }
-      })
-      .catch((err) => console.log(err));
+      });
+    } else {
+      const cartInfo = {
+        cartId: _id,
+        email: user?.email,
+        image,
+        name,
+        recipe,
+        price,
+      };
+
+      axiosPublic
+        .post('/cart', cartInfo)
+        .then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Added to the cart Successfully',
+              showConfirmButton: true,
+              timer: 2500,
+            });
+
+            refetch();
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
