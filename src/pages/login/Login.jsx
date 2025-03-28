@@ -10,6 +10,7 @@ import {
 } from 'react-simple-captcha';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import SocialLogin from '../shared/socialLogin/SocialLogin';
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -113,7 +114,8 @@ const Login = () => {
                 New here ? Create a New Account
               </Link>
               <p>Or Signin With</p>
-              <p>google</p>
+
+              <SocialLogin />
             </div>
           </div>
         </div>

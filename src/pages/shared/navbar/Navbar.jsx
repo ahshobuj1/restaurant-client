@@ -82,7 +82,7 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end space-x-4 flex items-center">
-          <div className="dropdown dropdown-end mt-">
+          <div className="dropdown dropdown-end mt-2">
             <div
               tabIndex={0}
               role="button"
@@ -154,7 +154,11 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <NavLink to="/login">Login</NavLink>
+            <NavLink
+              to="/login"
+              className="btn btn-neutral hover:text-blue-500 btn-sm px-6">
+              Login
+            </NavLink>
           )}
         </div>
       </div>

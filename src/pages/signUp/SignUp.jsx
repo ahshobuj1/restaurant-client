@@ -7,6 +7,7 @@ import {updateProfile} from 'firebase/auth';
 import {auth} from '../../firebase/firebase';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import SocialLogin from '../shared/socialLogin/SocialLogin';
 
 const SignUp = () => {
   const {createUser} = useAuth();
@@ -152,7 +153,8 @@ const SignUp = () => {
                 Already have an Account ? Login please
               </Link>
               <p>Or Signin With</p>
-              <p>google</p>
+
+              <SocialLogin />
             </div>
           </div>
         </div>
