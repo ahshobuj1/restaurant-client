@@ -1,4 +1,81 @@
+import {NavLink, Outlet} from 'react-router';
+import {
+  FaCalendar,
+  FaCalendarCheck,
+  FaHome,
+  FaList,
+  FaPaypal,
+  FaShoppingBag,
+  FaShoppingCart,
+  FaStar,
+  FaVoicemail,
+} from 'react-icons/fa';
+
 const Dashboard = () => {
+  const userNavbar = (
+    <>
+      <li>
+        <NavLink to="/dashboard">
+          <FaHome />
+          User Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/reservation">
+          <FaCalendar />
+          Reservation
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/payment">
+          <FaPaypal /> Payment History
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/cart">
+          <FaShoppingCart /> My Cart
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/review">
+          <FaStar /> Add Review
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/booking">
+          <FaCalendarCheck /> My Booking
+        </NavLink>
+      </li>
+    </>
+  );
+
+  const commonNav = (
+    <>
+      <li>
+        <NavLink to="/">
+          <FaHome />
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/menu">
+          <FaList />
+          Menu
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/shop/salads">
+          <FaShoppingBag /> Shop
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/shop/salads">
+          <FaVoicemail /> Contact
+        </NavLink>
+      </li>
+    </>
+  );
+
   return (
     <div className="max-w-[1440px] mx-auto">
       <div className="navbar bg-[#d19f54a2] shadow-sm text-black">
@@ -21,20 +98,21 @@ const Dashboard = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 min-h-screen shadow bg-[#D1A054] text-black">
-              <li>
-                <a>Sidebar Item 1</a>
-              </li>
-              <li>
-                <a>Sidebar Item 2</a>
-              </li>
+              className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 min-h-screen shadow bg-[#D1A054] text-black text-xl ">
+              {userNavbar}
+              <div className="divider"></div>
+              {commonNav}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl hidden lg:flex">daisyUI</a>
+          <a className="btn btn-ghost hidden lg:flex text-3xl font-medium capitalize">
+            Bistro boss
+          </a>
         </div>
 
         <div className="navbar-end lg:hidden">
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-3xl font-medium capitalize">
+            bistro boss
+          </a>
         </div>
       </div>
 
@@ -43,7 +121,7 @@ const Dashboard = () => {
 
         <div className="drawer-content flex flex-col ">
           {/* Page content here */}
-          <h2>helllo</h2>
+          <Outlet />
         </div>
 
         <div className="drawer-side ">
@@ -51,14 +129,11 @@ const Dashboard = () => {
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
             className="drawer-overlay"></label>
-          <ul className="menu  text-base-content min-h-full w-80 p-4 bg-[#D1A054]">
+          <ul className="menu  text-base-content min-h-full w-80 p-4 bg-[#D1A054] text-xl">
             {/* Sidebar content here */}
-            <li>
-              <a>Sidebar Item 1</a>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
+            {userNavbar}
+            <div className="divider"></div>
+            {commonNav}
           </ul>
         </div>
       </div>

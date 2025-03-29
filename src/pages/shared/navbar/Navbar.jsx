@@ -1,4 +1,4 @@
-import {NavLink} from 'react-router';
+import {Link, NavLink} from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useCart from '../../../hooks/useCart';
@@ -130,7 +130,7 @@ const Navbar = () => {
                     <span className="text-info">Subtotal: ${totalPrice}</span>
                     <div className="card-actions">
                       <button className="btn btn-primary btn-block">
-                        View cart
+                        <Link to="/dashboard/cart">View cart</Link>
                       </button>
                     </div>
                   </div>
