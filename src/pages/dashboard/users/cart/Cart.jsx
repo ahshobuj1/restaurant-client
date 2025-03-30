@@ -1,12 +1,46 @@
-import {FaTrash, FaTrashAlt} from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import useAxiosPublic from '../../../../hooks/useAxiosPublic';
 import useCart from '../../../../hooks/useCart';
+import TaleRow from './tableRow/TaleRow';
+import SectionTitle from '../../../shared/sectionTitle/SectionTitle';
 
 const Cart = () => {
-  const [carts] = useCart();
+  const [carts, refetch] = useCart();
   const totalPrice = carts.reduce((prev, cart) => prev + cart.price, 0);
+  const axiosPublic = useAxiosPublic();
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic
+          .delete(`/cart/${id}`)
+          .then((res) => {
+            if (res?.data?.deletedCount > 0) {
+              Swal.fire({
+                title: 'Deleted!',
+                text: 'Your item has been deleted.',
+                icon: 'success',
+              });
+
+              refetch();
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    });
+  };
 
   return (
     <section className="p-10">
+      <SectionTitle heading={'wanna add more'} subHeading={'my cart'} />
       <div className="bg-base-200 p-2 rounded-xl">
         <div className="flex justify-evenly mb-8">
           <h2 className="text-2xl uppercase">Total Orders: {carts.length}</h2>
@@ -29,28 +63,12 @@ const Cart = () => {
               </thead>
               <tbody>
                 {carts.map((cart, idx) => (
-                  <tr>
-                    <td>{idx + 1}</td>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle h-12 w-12">
-                            <img
-                              src={cart?.image}
-                              alt="Avatar Tailwind CSS Component"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>{cart?.name}</td>
-                    <td>{cart?.price}</td>
-                    <td>
-                      <button className="btn btn-sm text-red-600 text-2xl hover:text-blue-600 ">
-                        <FaTrashAlt />
-                      </button>
-                    </td>
-                  </tr>
+                  <TaleRow
+                    key={cart._id}
+                    handleDelete={handleDelete}
+                    cart={cart}
+                    idx={idx}
+                  />
                 ))}
               </tbody>
             </table>

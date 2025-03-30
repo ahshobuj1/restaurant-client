@@ -12,6 +12,41 @@ import {
 } from 'react-icons/fa';
 
 const Dashboard = () => {
+  const isAdmin = true;
+
+  const adminNavbar = (
+    <>
+      <li>
+        <NavLink to="/dashboard">
+          <FaHome />
+          Admin Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/addItems">
+          <FaCalendar />
+          Add Items
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/manageItems">
+          <FaPaypal /> Manage Items
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/manageBooking">
+          <FaShoppingCart /> Manage Booking
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink to="/dashboard/allUsers">
+          <FaCalendarCheck /> All Users
+        </NavLink>
+      </li>
+    </>
+  );
+
   const userNavbar = (
     <>
       <li>
@@ -76,6 +111,8 @@ const Dashboard = () => {
     </>
   );
 
+  const conditionalNavbar = isAdmin ? adminNavbar : userNavbar;
+
   return (
     <div className="max-w-[1440px] mx-auto">
       <div className="navbar bg-[#d19f54a2] shadow-sm text-black">
@@ -99,7 +136,7 @@ const Dashboard = () => {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 min-h-screen shadow bg-[#D1A054] text-black text-xl ">
-              {userNavbar}
+              {conditionalNavbar}
               <div className="divider"></div>
               {commonNav}
             </ul>
@@ -131,7 +168,7 @@ const Dashboard = () => {
             className="drawer-overlay"></label>
           <ul className="menu  text-base-content min-h-full w-80 p-4 bg-[#D1A054] text-xl">
             {/* Sidebar content here */}
-            {userNavbar}
+            {conditionalNavbar}
             <div className="divider"></div>
             {commonNav}
           </ul>
