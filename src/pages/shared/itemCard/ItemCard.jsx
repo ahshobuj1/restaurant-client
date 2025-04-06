@@ -1,7 +1,7 @@
 const ItemCard = ({item}) => {
   const {image, name, price, recipe} = item;
 
-  console.log('[itemCard]', item);
+  // console.log('[itemCard]', item);
   return (
     <div className="space-x-1 flex justify-between items-center gap-5">
       <img

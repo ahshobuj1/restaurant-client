@@ -8,6 +8,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import {auth} from '../firebase/firebase';
+import useAxiosPublic from '../hooks/useAxiosPublic';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext();
@@ -17,6 +18,7 @@ const provider = new GoogleAuthProvider();
 const UserContext = ({children}) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -44,13 +46,22 @@ const UserContext = ({children}) => {
 
       if (currentUser) {
         setLoading(false);
+
+        const user = {email: currentUser?.email};
+        axiosPublic.post('/jwt', user).then((res) => {
+          // console.log(res?.data?.token);
+          if (res?.data?.token) {
+            localStorage.setItem('access-token', res?.data?.token);
+          }
+        });
       } else {
         setLoading(false);
+        localStorage.removeItem('access-token');
       }
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [axiosPublic]);
 
   const authInfo = {
     user,
