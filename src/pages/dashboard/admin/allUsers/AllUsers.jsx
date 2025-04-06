@@ -1,7 +1,7 @@
 import {useQuery} from '@tanstack/react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
-import {FaTrashAlt, FaUser, FaUsers} from 'react-icons/fa';
+import {FaTrashAlt, FaUsers} from 'react-icons/fa';
 import SectionTitle from '../../../shared/sectionTitle/SectionTitle';
 
 const AllUsers = () => {
@@ -10,8 +10,12 @@ const AllUsers = () => {
   const {data: users = [], refetch} = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const res = await axiosSecure('user');
-      return res.data;
+      const res = await axiosSecure('/user', {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('access-token')}`,
+        },
+      });
+      return res?.data;
     },
   });
 
