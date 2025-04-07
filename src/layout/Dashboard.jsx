@@ -10,9 +10,11 @@ import {
   FaStar,
   FaVoicemail,
 } from 'react-icons/fa';
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
+  console.log('admin check', isAdmin);
 
   const adminNavbar = (
     <>
