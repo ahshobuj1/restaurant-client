@@ -1,11 +1,62 @@
 import {useForm} from 'react-hook-form';
 import SectionTitle from '../../../shared/sectionTitle/SectionTitle';
 import {FaUtensils} from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import moment from 'moment';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 const AddItems = () => {
-  const {register, handleSubmit} = useForm();
+  const {register, handleSubmit, reset} = useForm();
+  const axiosSecure = useAxiosSecure();
 
   const onSubmit = (data) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `You won to add the '${data.name}' Items`,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'AddItems!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        //* Upload image to imgbb
+        const file = data?.image[0];
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const res = await axios.post(
+          `https://api.imgbb.com/1/upload?key=${
+            import.meta.env.VITE_API_KEY_IMGBB
+          }`,
+          formData
+        );
+        const imageURL = res?.data?.data?.url;
+        // console.log(imageURL);
+
+        const itemInfo = {
+          name: data?.name,
+          price: parseFloat(data?.price),
+          recipe: data?.recipe,
+          category: data?.category,
+          image: imageURL,
+          date: moment().format('MMMM Do YYYY, h:mm:ss a'),
+        };
+
+        const resAddItems = await axiosSecure.post('/menu', itemInfo);
+        const result = resAddItems?.data;
+        if (result.insertedId) {
+          Swal.fire({
+            title: 'Added!',
+            text: 'Your Items has been added.',
+            icon: 'success',
+          });
+
+          reset();
+        }
+      }
+    });
+
     console.log(data);
   };
 
