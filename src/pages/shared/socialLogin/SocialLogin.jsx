@@ -23,7 +23,8 @@ const SocialLogin = () => {
           .post('/user', userInfo)
           .then((res) => {
             console.log(res);
-            if (res.data.insertedId) {
+            navigate(location?.state ? location?.state : '/');
+            if (res?.data?.insertedId) {
               Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -31,8 +32,6 @@ const SocialLogin = () => {
                 showConfirmButton: false,
                 timer: 3000,
               });
-
-              navigate(location?.state ? location?.state : '/');
             }
           })
           .catch((err) => console.log(err));
