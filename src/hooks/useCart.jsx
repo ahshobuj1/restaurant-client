@@ -16,7 +16,7 @@ const useCart = () => {
 
     queryFn: async () => {
       const res = await axiosPublic(`/cart?email=${user?.email}`);
-      return res.data;
+      return res?.data;
     },
   });
 
