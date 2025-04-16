@@ -3,6 +3,7 @@ import useAxiosPublic from '../../../../hooks/useAxiosPublic';
 import useCart from '../../../../hooks/useCart';
 import TaleRow from './tableRow/TaleRow';
 import SectionTitle from '../../../shared/sectionTitle/SectionTitle';
+import {Link} from 'react-router';
 
 const Cart = () => {
   const [carts, refetch] = useCart();
@@ -45,7 +46,16 @@ const Cart = () => {
         <div className="flex justify-evenly mb-8">
           <h2 className="text-2xl uppercase">Total Orders: {carts.length}</h2>
           <h2 className="text-2xl uppercase">Total price: {totalPrice}</h2>
-          <button className="btn btn-neutral text-xl uppercase">Pay</button>
+
+          {totalPrice > 0 ? (
+            <Link to="/dashboard/payment">
+              <button className="btn btn-neutral text-xl uppercase">Pay</button>
+            </Link>
+          ) : (
+            <button disabled className="btn btn-neutral text-xl uppercase">
+              Pay
+            </button>
+          )}
         </div>
 
         <div>

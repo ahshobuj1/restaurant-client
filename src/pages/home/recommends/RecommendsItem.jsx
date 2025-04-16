@@ -9,7 +9,7 @@ import useMenu from '../../../hooks/useMenu';
 
 const RecommendsItem = () => {
   const [menu] = useMenu();
-  const saladItems = menu.filter((item) => item.category === 'salad');
+  const saladItems = menu?.filter((item) => item?.category === 'salad');
 
   return (
     <section className="px-2 md:px-0 md:mb-20">
@@ -42,7 +42,7 @@ const RecommendsItem = () => {
         }}
         modules={[Pagination, Autoplay]}
         className="mySwiper">
-        {saladItems.map((item) => (
+        {saladItems?.map((item) => (
           <SwiperSlide>
             <ProductCard key={item.id} item={item} />
           </SwiperSlide>

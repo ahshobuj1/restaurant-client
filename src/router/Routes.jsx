@@ -14,6 +14,7 @@ import AdminRoute from './AdminRoute';
 import AddItems from '../pages/dashboard/admin/addItems/AddItems';
 import ManageItems from '../pages/dashboard/admin/manageItems/ManageItems';
 import UpdateItems from '../pages/dashboard/admin/updateItems/UpdateItems';
+import StripePayment from '../pages/dashboard/users/stripePayment/StripePayment';
 
 const router = createBrowserRouter([
   {
@@ -38,10 +39,15 @@ const router = createBrowserRouter([
 
   {
     path: '/dashboard',
-    Component: Dashboard,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       //* User Routes
-      {path: 'cart', Component: Cart},
+      {path: 'cart', element: <Cart />},
+      {path: 'payment', element: <StripePayment />},
 
       //* Admin Routes
       {

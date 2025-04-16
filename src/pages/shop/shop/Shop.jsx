@@ -18,11 +18,11 @@ const Shop = () => {
 
   const [menu] = useMenu();
 
-  const drinksItem = menu.filter((item) => item.category === 'drinks');
-  const saladItem = menu.filter((item) => item.category === 'salad');
-  const dessertItem = menu.filter((item) => item.category === 'dessert');
-  const soupItem = menu.filter((item) => item.category === 'soup');
-  const pizzaItem = menu.filter((item) => item.category === 'pizza');
+  const drinksItem = menu?.filter((item) => item.category === 'drinks');
+  const saladItem = menu?.filter((item) => item.category === 'salad');
+  const dessertItem = menu?.filter((item) => item.category === 'dessert');
+  const soupItem = menu?.filter((item) => item.category === 'soup');
+  const pizzaItem = menu?.filter((item) => item.category === 'pizza');
 
   return (
     <section>
