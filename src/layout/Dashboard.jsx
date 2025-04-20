@@ -19,7 +19,7 @@ const Dashboard = () => {
   const adminNavbar = (
     <>
       <li>
-        <NavLink to="/dashboard">
+        <NavLink to="/dashboard/adminHome">
           <FaHome />
           Admin Home
         </NavLink>
@@ -52,7 +52,7 @@ const Dashboard = () => {
   const userNavbar = (
     <>
       <li>
-        <NavLink to="/dashboard">
+        <NavLink to="/dashboard/userHome">
           <FaHome />
           User Home
         </NavLink>
@@ -64,7 +64,7 @@ const Dashboard = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/payment">
+        <NavLink to="/dashboard/paymentHistory">
           <FaPaypal /> Payment History
         </NavLink>
       </li>

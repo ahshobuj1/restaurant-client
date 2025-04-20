@@ -2,10 +2,12 @@ import {Link, NavLink} from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useCart from '../../../hooks/useCart';
+import useAdmin from '../../../hooks/useAdmin';
 
 const Navbar = () => {
   const {user, logOutUser} = useAuth();
   const [carts] = useCart();
+  const [isAdmin] = useAdmin();
 
   const totalPrice = carts.reduce(
     (prevPrice, cart) => prevPrice + cart.price,
@@ -50,9 +52,17 @@ const Navbar = () => {
         <NavLink to="shop/salads">Shop</NavLink>
       </li>
 
-      <li>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-      </li>
+      {user && isAdmin && (
+        <li>
+          <NavLink to="/dashboard/adminHome">Dashboard</NavLink>
+        </li>
+      )}
+
+      {user && !isAdmin && (
+        <li>
+          <NavLink to="/dashboard/userHome">Dashboard</NavLink>
+        </li>
+      )}
     </>
   );
 

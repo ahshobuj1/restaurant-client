@@ -83,7 +83,7 @@ const CheckoutForm = () => {
               name: user?.displayName,
               email: user?.email,
               price: totalPrice,
-              status: 'pending',
+              status: 'success',
               transactionId: paymentIntent.id,
               date: moment().format('MMMM Do YYYY, h:mm:ss a'),
               ids: carts.map((cart) => cart._id),

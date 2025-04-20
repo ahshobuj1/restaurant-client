@@ -5,10 +5,12 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import moment from 'moment';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import {useState} from 'react';
 
 const AddItems = () => {
   const {register, handleSubmit, reset} = useForm();
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (data) => {
     Swal.fire({
@@ -20,6 +22,8 @@ const AddItems = () => {
       confirmButtonText: 'AddItems!',
     }).then(async (result) => {
       if (result.isConfirmed) {
+        setLoading(true);
+
         //* Upload image to imgbb
         const file = data?.image[0];
         const formData = new FormData();
@@ -53,6 +57,7 @@ const AddItems = () => {
           });
 
           reset();
+          setLoading(false);
         }
       }
     });
@@ -138,12 +143,17 @@ const AddItems = () => {
             className="file-input file-input-bordered w-full max-w-xs"
           />
         </label>
-
-        <button
-          type="submit"
-          className="btn btn-outline px-6 text-white bg-gradient-to-r from-[#835D23] to-[#B58130]">
-          Add Items <FaUtensils />
-        </button>
+        {loading ? (
+          <button className="btn btn-outline px-6 text-white bg-gradient-to-r from-[#835D23] to-[#B58130]">
+            <span className="loading loading-ring loading-xl"></span>
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="btn btn-outline px-6 text-white bg-gradient-to-r from-[#835D23] to-[#B58130]">
+            Add Items <FaUtensils />
+          </button>
+        )}
       </form>
     </section>
   );
